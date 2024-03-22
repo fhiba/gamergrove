@@ -1,6 +1,5 @@
 package ar.edu.itba.paw.webapp.controller;
 
-import ar.edu.itba.paw.User;
 import ar.edu.itba.paw.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HelloWorldController {
+    private final UserService us;
+
+    @Autowired
+    public HelloWorldController(UserService us) {
+        this.us = us;
+    }
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView helloWorld() {
