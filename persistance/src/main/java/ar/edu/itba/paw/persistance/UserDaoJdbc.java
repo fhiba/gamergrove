@@ -25,10 +25,6 @@ public class UserDaoJdbc implements UserDao{
     @Autowired
     public UserDaoJdbc(final DataSource ds){
         jdbcTemplate = new JdbcTemplate(ds);
-        jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS users( " +
-                "id SERIAL PRIMARY KEY," +
-                "username VARCHAR(255) NOT NULL UNIQUE" +
-                ")");
         jdbcInsert = new SimpleJdbcInsert(ds).usingGeneratedKeyColumns("id").withTableName("users");
     }
 
@@ -59,6 +55,6 @@ public class UserDaoJdbc implements UserDao{
         userData.put("password",password);
         userData.put("owner", false);
         Number id = jdbcInsert.executeAndReturnKey(userData);
-        return new User(id.longValue(), username, email, password);
+        return new User(id.longValue(), username, password, email);
     }
 }
