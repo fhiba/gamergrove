@@ -19,17 +19,6 @@ public class HelloWorldController {
         this.us = us;
     }
 
-    @RequestMapping(path = "/register", method = RequestMethod.GET)
-    public ModelAndView registerForm() {
-        final ModelAndView mav = new ModelAndView("user/register_form");
-        return mav;
-    }
-
-    @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public ModelAndView register(@RequestParam("username") String username) {
-        final User user = us.create(username);
-        return new ModelAndView("redirect:/"+user.getId());
-    }
 
     @RequestMapping(method = RequestMethod.GET,path = "/{userId:\\d+}")
     public ModelAndView userProfile(@PathVariable("userId") final long userId) {
